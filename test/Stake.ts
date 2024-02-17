@@ -41,5 +41,11 @@ describe("Stake", function () {
       const tx = await stake.deposit({ value: 0 });
       expect(tx).to.revertedWithCustomError;
     });
+
+    it("Should emit deposit successful event, if deposit was successful", async function () {
+      const { stake } = await loadFixture(deployOneYearLockFixture);
+      const tx = await stake.deposit({ value: ethers.parseEther("1") });
+      expect(tx).emit;
+    });
   });
 });
