@@ -81,5 +81,4 @@ contract Stake {
    function checkContractBalance() external view returns(uint){
         return address(this).balance;
     }
-
 }
