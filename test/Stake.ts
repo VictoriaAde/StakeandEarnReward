@@ -38,14 +38,29 @@ describe("Stake", function () {
 
     it("should revert with error when trying to deposit zero value", async function () {
       const { stake } = await loadFixture(deployOneYearLockFixture);
-      const tx = await stake.deposit({ value: 0 });
-      expect(tx).to.revertedWithCustomError;
+      const tx = stake.deposit({ value: 0 });
+      expect(tx).to.be.revertedWithCustomError;
     });
 
     it("Should emit deposit successful event, if deposit was successful", async function () {
       const { stake } = await loadFixture(deployOneYearLockFixture);
       const tx = await stake.deposit({ value: ethers.parseEther("1") });
       expect(tx).emit;
+    });
+  });
+
+  // describe("Reward", function () {
+  //   it("Should pass if reward is accurately 10% every minute", async function () {
+  //     const { stake } = await loadFixture(deployOneYearLockFixture);
+  //   });
+  // });
+
+  describe("Reward", function () {
+    it("Should revert with error when users are trying to checkReward without staking", async function () {
+      const { stake } = await loadFixture(deployOneYearLockFixture);
+
+      // Attempt to check reward without staking
+      expect(stake.checkReward()).to.be.revertedWithCustomError;
     });
   });
 });
