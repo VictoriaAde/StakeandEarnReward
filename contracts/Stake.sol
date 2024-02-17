@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract StakeContract {
+contract Stake {
     error NOT_TIME_FOR_WITHDRAWAL();
     error NOT_AUTHORISED_TO_CALL_FUNCTION();
     error ZERO_VALUE();
