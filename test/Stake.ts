@@ -24,7 +24,9 @@ describe("Stake", function () {
       const { stake, unlockTime } = await loadFixture(deployOneYearLockFixture);
       expect(await stake.unlockTime()).to.equal(unlockTime);
     });
+  });
 
+  describe("Deposit", function () {
     it("Should receive and deposit the funds to stake", async function () {
       const { stake, owner } = await loadFixture(deployOneYearLockFixture);
 
@@ -33,6 +35,11 @@ describe("Stake", function () {
       const stakerBal = await stake.stakers(owner);
       expect(stakerBal).to.equal(1000000000000000000n);
     });
-    z;
+
+    it("should revert with error when trying to deposit zero value", async function () {
+      const { stake } = await loadFixture(deployOneYearLockFixture);
+      const tx = await stake.deposit({ value: 0 });
+      expect(tx).to.revertedWithCustomError;
+    });
   });
 });
